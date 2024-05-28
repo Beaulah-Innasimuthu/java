@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String stringValue = sc.nextLine();
+        int intValue = sc.nextInt();
+        float floatValue = sc.nextFloat();
+        sc.nextLine(); 
+        char charValue = sc.next().charAt(0);
+      
+        String truncatedFloat = truncateFloat(floatValue);
+      
+        System.out.println("Name: " + stringValue);
+        System.out.println("Age: " + intValue);
+        System.out.println("CGPA: " + truncatedFloat);
+        System.out.println("Grade: " + charValue);
+    }
+
+    public static String truncateFloat(float value) {
+        String floatString = Float.toString(value);
+        int decimalIndex = floatString.indexOf(".");
+        if (decimalIndex == -1) {
+            // No decimal point, return the original number
+            return floatString;
+        } else {
+            int endIndex = Math.min(decimalIndex + 3, floatString.length());
+            return floatString.substring(0, endIndex);
+        }
+    }
+}
