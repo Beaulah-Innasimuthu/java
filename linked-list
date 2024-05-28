@@ -1,0 +1,164 @@
+import java.util.*;
+class Node
+{
+  int data;
+  Node next = null;
+    Node (int data)
+  {
+	this.data = data;
+  }
+}
+class LinkedList
+{
+  Node head = null;
+  Node tail = null;
+  void deleteAtEnd()
+    {
+        Node temp = head;
+        while(temp.next!=tail)
+        {
+            temp=temp.next;
+        }
+        temp.next=null;
+        tail=temp;
+        
+    }
+    void deleteAtBeg()
+    {
+        if (head == null)   
+            return;
+            
+        head = head.next;  
+
+        if (head == null)   
+            tail = null;
+    }
+    void deleteAtMiddle(int pos)
+    {
+        if(pos==0)
+        {
+            if(head==null)
+                return;
+            else
+                head=head.next;
+        }
+        else
+        {
+            Node temp=head;
+            while(pos-->1)
+                temp=temp.next;
+            temp.next=temp.next.next;
+        }
+    }
+  void insertAtEnd (int data)
+  {
+	Node nn = new Node (data);
+	if (head == null)
+	  {
+		head = nn;
+		tail = nn;
+	  }
+	else
+	  {
+		tail.next = nn;
+		tail = tail.next;
+	  }
+  }
+  void insertAtBeginning (int data)
+  {
+	Node nn = new Node (data);
+	if (head == null)
+	  {
+		head = nn;
+		tail = nn;
+	  }
+	else
+	  {
+		nn.next = head;
+		head = nn;
+	  }
+  }
+  void insertAtMiddle (int data, int pos)
+  {
+	Node nn = new Node (data);
+	if (pos == 0)
+	  {
+		if (head == null)
+		  {
+			head = nn;
+			tail = nn;
+		  }
+		else
+		  {
+			nn.next = head;
+			head = nn;
+		  }
+	  }
+	else
+	  {
+		Node temp = head;
+		while (pos-- > 1)
+		  temp = temp.next;
+		nn.next = temp.next;
+		temp.next = nn;
+	  }
+  }
+  void print ()
+  {
+	Node temp = head;
+	while (temp != null)
+	  {
+		System.out.print(temp.data + " ");
+		temp = temp.next;
+	  }
+  }
+}
+
+public class Main
+{
+  public static void main (String[]args)
+  {
+	Scanner sc = new Scanner (System.in);
+	LinkedList ll = new LinkedList ();
+	int ele, choice;
+	boolean running = true;
+	System.out.println("1.insert at end\n2.insert at beginning \n3.insert at middle \n4.delete at end \n5.delet at beginning \n6.delete at middle");
+	System.out.print("Enter your choice: ");
+	choice = sc.nextInt ();
+	while ((ele = sc.nextInt ()) > 0)
+	  {
+		switch (choice)
+		  {
+		    case 1:
+		        ll.insertAtEnd(ele);
+		        break;
+		    case 2:
+		        ll.insertAtBeginning (ele);
+		        break;
+		    case 3:
+		        System.out.println("\nenter element to be inserted at the middle with position: ");
+            	int ele2 = sc.nextInt ();
+            	int pos = sc.nextInt ();
+            	ll.insertAtMiddle (ele2, pos);
+		        break;
+		    case 4:
+		        ll.deleteAtEnd();
+		        break;
+		    case 5:
+		        ll.deleteAtBeg();
+		        break;
+		    case 6:
+		        System.out.println("\nenter element position to be deleted: ");
+            	int pos2 = sc.nextInt ();
+		        ll.deleteAtMiddle(pos2);
+		        break;
+		    default:
+                System.out.println("Number out of range. Exiting.");
+                running = false;
+                break;
+            }
+        }
+    sc.close();
+	ll.print ();
+  }
+}
