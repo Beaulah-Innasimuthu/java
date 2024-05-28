@@ -1,0 +1,109 @@
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+	
+		LinkedList list1=new LinkedList();
+	    int s1=sc.nextInt();
+	    for(int i=0;i<s1;i++)
+		  list1.insertAtEnd(sc.nextInt());
+		  	LinkedList list2=new LinkedList();
+		int s2=sc.nextInt();
+	    for(int i=0;i<s2;i++)
+		  list2.insertAtEnd(sc.nextInt());
+     //  list1.print();
+     //  System.out.println();
+      // list2.print();
+	   merger listm=new merger();
+	 Node sortedHead=  listm.merge(list1.head,list2.head);
+		  listm.print(sortedHead);
+	}
+	
+	static class merger
+	{
+	    Node merge(Node head1,Node head2)
+	    {
+	        Node dummy=new Node(0);
+	        Node sort=dummy;
+	        while(head1!=null  && head2!=null)
+	        {
+	            if(head1.data<=head2.data)
+	            {
+	                sort.next=head1;
+	                head1=head1.next;
+	            }
+	            else
+	              {
+	                sort.next=head2;
+	                head2=head2.next;
+	              }
+	        sort=sort.next;       
+	        }
+	        
+	        while(head1!=null)
+	        {
+	            sort.next=head1;
+	            head1=head1.next;
+	            sort=sort.next;
+	        }
+	        while(head2!=null)
+	        {
+	            sort.next=head2;
+	            head2=head2.next;
+	            sort=sort.next;
+	        }
+	        return dummy.next;
+	    }
+	      void print(Node head)
+	    {
+	        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + "->");
+            temp = temp.next;
+        }
+      System.out.print("NULL");
+	    }
+	}
+	static class LinkedList
+	{
+	    Node head=null;
+	    Node tail=null;
+	  
+	     void insertAtEnd(int data)
+	    {
+	        Node newNode=new Node(data);
+	        if(head==null)
+	        {
+	            head=newNode;
+	            tail=newNode;
+	        }
+	        else
+	        {
+	            tail.next=newNode;
+	            tail=newNode;
+	        }
+	    }
+
+
+
+	    void print()
+	    {
+	        Node temp=head;
+	        while(temp!=null)   
+	        {
+	            System.out.print(temp.data+" ");
+	            temp=temp.next;
+	        }
+	    }
+	}
+	static class Node 
+	{
+	    int data;
+	    Node next=null;
+	    Node(int data)
+	    {
+	        this.data=data;
+	    }
+	}
+}
