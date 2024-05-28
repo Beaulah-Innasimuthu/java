@@ -1,0 +1,64 @@
+import java.util.*;
+class Node{
+    int data;
+    Node next=null;
+    Node(int data)
+    {
+        this.data=data;
+    }
+}
+class LinkedList
+{
+    int count=0;
+  	Node head=null;
+    Node tail=null;
+    void insertwd(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            tail=nn;
+          	count++;
+        }
+        else{
+            Node temp=head;
+            while(temp!=null){
+                if(temp.data==data)
+                    return;
+                temp=temp.next;
+            }
+            tail.next = nn;
+            tail = nn;
+          	count++;
+        }
+    }
+  	int length()
+    {
+      return count;
+    }
+    void print()
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            System.out.println(temp.data);
+            temp=temp.next;
+        }
+    }
+}
+public class Main
+{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        LinkedList ll=new LinkedList();
+        int ele;
+        while((ele=sc.nextInt())>0)
+            ll.insertwd(ele);
+        int l = ll.length();
+        if(l!=0)
+          ll.print();
+      	else
+          System.out.print("List is empty");
+    }
+}
