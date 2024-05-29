@@ -1,0 +1,75 @@
+import java.util.Scanner;
+class Stack {
+    public int maxSize;
+    public int[] stackArray;
+    public int top;
+
+    public Stack(int size) {
+        this.maxSize = size;
+        this.stackArray = new int[size];
+        this.top = -1;
+    }
+
+    public void push(int value) {
+        if (isFull()) {
+            System.out.println("Stack is full. Cannot push " + value);
+        } else {
+            stackArray[++top] = value;
+        }
+    }
+    
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Cannot pop.");
+            return -1; 
+        } else {
+            return stackArray[top--];
+        }
+    }
+    
+    public boolean isEmpty() {
+        return top == -1;
+    }
+    
+    public boolean isFull() {
+        return top == maxSize - 1;
+    }
+    
+    public void printStackContent() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty.");
+        } else {
+            for (int i = 0; i <= top; i++) {
+                System.out.print(stackArray[i]);
+                if (i < top) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int size = Integer.parseInt(scanner.nextLine().trim());
+
+        Stack stack = new Stack(size); 
+
+        int inputCount = 0; 
+        while (inputCount < size && scanner.hasNextLine()) {
+            String command = scanner.nextLine().trim();
+
+            if (command.equalsIgnoreCase("push")) {
+                int value = Integer.parseInt(scanner.nextLine().trim());
+                stack.push(value);
+                inputCount++;
+            } else if (command.equalsIgnoreCase("pop")) {
+                stack.pop();
+                inputCount++;
+            }
+        }
+        stack.printStackContent();
+        scanner.close();
+    }
+}
