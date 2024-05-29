@@ -1,0 +1,89 @@
+import java.util.*;
+class Node{
+    int data;
+    Node next=null;
+    Node(int data)
+    {
+        this.data=data;
+    }
+}
+class LinkedList
+{
+    int count=0;
+    Node head=null;
+    Node tail=null;
+    void push(int data)
+    {
+        Node nn=new Node(data);
+        if(head==null)
+        {
+            head=nn;
+            tail=nn;
+            count++;
+        }
+        else{
+            nn.next=head;
+            head=nn;
+            count++;
+        }
+    }
+    int pop()
+    {
+        int data=head.data;
+        Node temp=head;
+        head=head.next;
+        temp.next=null;
+        count--;
+        return data;
+    }
+    int peek()
+    {
+        return head.data;
+    }
+    int size()
+    {
+        return count;
+    }
+    boolean isEmpty()
+    {
+        if(count==0)
+            return true;
+        else
+            return false;
+    }
+    void print()
+    {
+        Node temp=head;
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+}
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        int no=sc.nextInt();
+        int c=1;
+        LinkedList stack=new LinkedList();
+        while(c<=no)
+        {
+            int i=sc.nextInt();
+            if(i==1)
+                stack.push(sc.nextInt());
+            else if(i==2)
+                System.out.println(stack.pop());
+            else if(i==3)
+                System.out.println(stack.peek());
+            else if(i==4)
+                System.out.println(stack.size());
+            else
+                System.out.println(stack.isEmpty());
+            c++;
+        }
+        stack.print();
+    }
+}
